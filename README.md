@@ -1,149 +1,240 @@
-# 🤖 Agente Financeiro Inteligente com IA Generativa
+# 💡 Edu — Educador Financeiro com IA Generativa
 
-## Contexto
+Edu é um assistente virtual de educação financeira desenvolvido para oferecer suporte personalizado em finanças pessoais por meio de IA generativa.
 
-Os assistentes virtuais no setor financeiro estão evoluindo de simples chatbots reativos para **agentes inteligentes e proativos**. Neste desafio, você vai idealizar e prototipar um agente financeiro que utiliza IA Generativa para:
+A aplicação utiliza contexto do usuário (perfil de investidor, histórico de transações, atendimentos anteriores e produtos financeiros disponíveis) para responder dúvidas financeiras de forma didática, contextualizada e segura.
 
-- **Antecipar necessidades** ao invés de apenas responder perguntas
-- **Personalizar** sugestões com base no contexto de cada cliente
-- **Cocriar soluções** financeiras de forma consultiva
-- **Garantir segurança** e confiabilidade nas respostas (anti-alucinação)
-
-> [!TIP]
-> Na pasta [`examples/`](./examples/) você encontra referências de implementação para cada etapa deste desafio.
+O foco do projeto é unir experiência do usuário, análise de dados e IA em uma interface conversacional simples e acessível.
 
 ---
 
-## O Que Você Deve Entregar
+# O que é o Edu
 
-### 1. Documentação do Agente
+O Edu atua como um educador financeiro digital.
 
-Defina **o que** seu agente faz e **como** ele funciona:
+Seu objetivo não é recomendar investimentos específicos, mas ajudar usuários a compreender conceitos como:
 
-- **Caso de Uso:** Qual problema financeiro ele resolve? (ex: consultoria de investimentos, planejamento de metas, alertas de gastos)
-- **Persona e Tom de Voz:** Como o agente se comporta e se comunica?
-- **Arquitetura:** Fluxo de dados e integração com a base de conhecimento
-- **Segurança:** Como evitar alucinações e garantir respostas confiáveis?
+- reserva de emergência
+- orçamento pessoal
+- renda fixa
+- diversificação
+- planejamento financeiro
+- perfil de investidor
 
-📄 **Template:** [`docs/01-documentacao-agente.md`](./docs/01-documentacao-agente.md)
+As respostas são geradas considerando dados reais simulados do cliente, tornando a experiência mais personalizada.
 
----
+Exemplo:
 
-### 2. Base de Conhecimento
-
-Utilize os **dados mockados** disponíveis na pasta [`data/`](./data/) para alimentar seu agente:
-
-| Arquivo | Formato | Descrição |
-|---------|---------|-----------|
-| `transacoes.csv` | CSV | Histórico de transações do cliente |
-| `historico_atendimento.csv` | CSV | Histórico de atendimentos anteriores |
-| `perfil_investidor.json` | JSON | Perfil e preferências do cliente |
-| `produtos_financeiros.json` | JSON | Produtos e serviços disponíveis |
-
-Você pode adaptar ou expandir esses dados conforme seu caso de uso.
-
-📄 **Template:** [`docs/02-base-conhecimento.md`](./docs/02-base-conhecimento.md)
+- perfil do investidor
+- patrimônio atual
+- reserva de emergência
+- transações recentes
+- histórico de atendimentos
 
 ---
 
-### 3. Prompts do Agente
+# Arquitetura da Solução
 
-Documente os prompts que definem o comportamento do seu agente:
+A aplicação segue uma arquitetura simples orientada a contexto.
 
-- **System Prompt:** Instruções gerais de comportamento e restrições
-- **Exemplos de Interação:** Cenários de uso com entrada e saída esperada
-- **Tratamento de Edge Cases:** Como o agente lida com situações limite
-
-📄 **Template:** [`docs/03-prompts.md`](./docs/03-prompts.md)
-
----
-
-### 4. Aplicação Funcional
-
-Desenvolva um **protótipo funcional** do seu agente:
-
-- Chatbot interativo (sugestão: Streamlit, Gradio ou similar)
-- Integração com LLM (via API ou modelo local)
-- Conexão com a base de conhecimento
-
-📁 **Pasta:** [`src/`](./src/)
-
----
-
-### 5. Avaliação e Métricas
-
-Descreva como você avalia a qualidade do seu agente:
-
-**Métricas Sugeridas:**
-- Precisão/assertividade das respostas
-- Taxa de respostas seguras (sem alucinações)
-- Coerência com o perfil do cliente
-
-📄 **Template:** [`docs/04-metricas.md`](./docs/04-metricas.md)
-
----
-
-### 6. Pitch
-
-Grave um **pitch de 3 minutos** (estilo elevador) apresentando:
-
-- Qual problema seu agente resolve?
-- Como ele funciona na prática?
-- Por que essa solução é inovadora?
-
-📄 **Template:** [`docs/05-pitch.md`](./docs/05-pitch.md)
-
----
-
-## Ferramentas Sugeridas
-
-Todas as ferramentas abaixo possuem versões gratuitas:
-
-| Categoria | Ferramentas |
-|-----------|-------------|
-| **LLMs** | [ChatGPT](https://chat.openai.com/), [Copilot](https://copilot.microsoft.com/), [Gemini](https://gemini.google.com/), [Claude](https://claude.ai/), [Ollama](https://ollama.ai/) |
-| **Desenvolvimento** | [Streamlit](https://streamlit.io/), [Gradio](https://www.gradio.app/), [Google Colab](https://colab.research.google.com/) |
-| **Orquestração** | [LangChain](https://www.langchain.com/), [LangFlow](https://www.langflow.org/), [CrewAI](https://www.crewai.com/) |
-| **Diagramas** | [Mermaid](https://mermaid.js.org/), [Draw.io](https://app.diagrams.net/), [Excalidraw](https://excalidraw.com/) |
-
----
-
-## Estrutura do Repositório
-
+```text
+Usuário
+   ↓
+Interface Web (Streamlit)
+   ↓
+Construção de contexto financeiro
+   ↓
+Prompt Engineering
+   ↓
+Google Gemini API
+   ↓
+Resposta contextualizada
 ```
-📁 lab-agente-financeiro/
+
+## Componentes
+
+### Frontend
+- Streamlit
+
+Responsável por:
+- interface conversacional
+- input do usuário
+- renderização das respostas
+- histórico de mensagens
+
+### Processamento de dados
+- Python
+- Pandas
+- JSON
+
+Responsável por:
+- leitura de datasets
+- carregamento de perfil
+- leitura de transações
+- leitura de histórico de atendimento
+- leitura de produtos financeiros
+
+### Modelo de IA
+- Google Gemini API
+
+Responsável por:
+- interpretação da pergunta
+- geração de resposta contextualizada
+- manutenção de comportamento via system prompt
+
+---
+
+# Estrutura do Projeto
+
+```bash
+dio-lab-bia-do-futuro/
 │
-├── 📄 README.md
+├── data/
+│   ├── perfil_investidor.json
+│   ├── transacoes.csv
+│   ├── historico_atendimento.csv
+│   └── produtos_financeiros.json
 │
-├── 📁 data/                          # Dados mockados para o agente
-│   ├── historico_atendimento.csv     # Histórico de atendimentos (CSV)
-│   ├── perfil_investidor.json        # Perfil do cliente (JSON)
-│   ├── produtos_financeiros.json     # Produtos disponíveis (JSON)
-│   └── transacoes.csv                # Histórico de transações (CSV)
+├── src/
+│   └── app.py
 │
-├── 📁 docs/                          # Documentação do projeto
-│   ├── 01-documentacao-agente.md     # Caso de uso e arquitetura
-│   ├── 02-base-conhecimento.md       # Estratégia de dados
-│   ├── 03-prompts.md                 # Engenharia de prompts
-│   ├── 04-metricas.md                # Avaliação e métricas
-│   └── 05-pitch.md                   # Roteiro do pitch
-│
-├── 📁 src/                           # Código da aplicação
-│   └── app.py                        # (exemplo de estrutura)
-│
-├── 📁 assets/                        # Imagens e diagramas
-│   └── ...
-│
-└── 📁 examples/                      # Referências e exemplos
-    └── README.md
+└── README.md
 ```
 
 ---
 
-## Dicas Finais
+# Como Executar
 
-1. **Comece pelo prompt:** Um bom system prompt é a base de um agente eficaz
-2. **Use os dados mockados:** Eles garantem consistência e evitam problemas com dados sensíveis
-3. **Foque na segurança:** No setor financeiro, evitar alucinações é crítico
-4. **Teste cenários reais:** Simule perguntas que um cliente faria de verdade
-5. **Seja direto no pitch:** 3 minutos passam rápido, vá ao ponto
+## 1. Clonar repositório
+
+```bash
+git clone https://github.com/caioverasalencar/dio-lab-bia-do-futuro.git
+cd dio-lab-bia-do-futuro
+```
+
+## 2. Instalar dependências
+
+```bash
+pip install streamlit pandas google-generativeai
+```
+
+## 3. Configurar API Key
+
+Criar chave gratuita no Google AI Studio:
+
+https://aistudio.google.com/app/apikey
+
+Adicionar no arquivo `app.py`:
+
+```python
+API_KEY = "SUA_API_KEY"
+```
+
+## 4. Executar aplicação
+
+```bash
+streamlit run ./src/app.py
+```
+
+---
+
+# Exemplo de Uso
+
+### Pergunta do usuário
+
+```text
+Quanto gastei com alimentação recentemente?
+```
+
+### Resposta esperada
+
+```text
+Com base nas suas transações recentes, você realizou gastos relacionados à alimentação.
+Esse acompanhamento ajuda no controle do orçamento e identificação de excessos.
+Você costuma separar um limite mensal para alimentação?
+```
+
+---
+
+### Pergunta conceitual
+
+```text
+O que é reserva de emergência?
+```
+
+### Resposta esperada
+
+```text
+Reserva de emergência é um valor guardado para lidar com imprevistos,
+como despesas médicas ou perda de renda.
+Ela costuma equivaler a alguns meses do custo de vida.
+Você já possui uma reserva estruturada?
+```
+
+---
+
+# Métricas de Avaliação
+
+A solução foi avaliada considerando:
+
+## Precisão contextual
+Capacidade de usar corretamente:
+- perfil do cliente
+- patrimônio
+- transações
+- histórico
+
+## Segurança de resposta
+Restrições implementadas:
+- não recomendar investimentos específicos
+- restringir respostas ao domínio financeiro
+
+## Eficiência de tokens
+Otimizações realizadas:
+- redução de contexto enviado
+- limitação de histórico
+- seleção parcial de produtos e transações
+
+## UX conversacional
+Critérios:
+- respostas curtas
+- linguagem simples
+- interface limpa
+- interação em formato chat
+
+---
+
+# Diferenciais
+
+## Contextualização personalizada
+As respostas utilizam dados do cliente em vez de respostas genéricas.
+
+## Segurança financeira
+Prompt restringe aconselhamento financeiro direto.
+
+## Interface acessível
+Uso de Streamlit para experiência web rápida e intuitiva.
+
+## IA Generativa integrada
+Uso de Google Gemini API como motor conversacional.
+
+## Otimização para free tier
+Ajustes para:
+- reduzir consumo de tokens
+- minimizar custo
+- melhorar estabilidade
+
+---
+
+# Tecnologias Utilizadas
+
+- Python
+- Streamlit
+- Pandas
+- Google Gemini API
+
+---
+
+# Autor
+
+Projeto desenvolvido por **Caio Veras Alencar** como solução para desafio da DIO.
