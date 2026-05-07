@@ -1,31 +1,33 @@
-# Código da Aplicação
+# Passo a Passo de Execução
 
-Esta pasta contém o código do seu agente financeiro.
+## Setup da API Google Gemini
 
-## Estrutura Sugerida
+```bash
+# 1. Instalar dependências
+pip install streamlit pandas google-generativeai
 
+# 2. Criar chave de API gratuita
+# https://aistudio.google.com/app/apikey
+
+# 3. Configurar a chave no arquivo
+# app.py
+
+API_KEY = "SUA_API_KEY_AQUI"
+
+# 4. Testar se funciona
+python app.py
 ```
-src/
-├── app.py              # Aplicação principal (Streamlit/Gradio)
-├── agente.py           # Lógica do agente
-├── config.py           # Configurações (API keys, etc.)
-└── requirements.txt    # Dependências
-```
 
-## Exemplo de requirements.txt
+## Código Completo
 
-```
-streamlit
-openai
-python-dotenv
-```
+Todo o código-fonte está no arquivo `app.py`.
 
 ## Como Rodar
 
 ```bash
-# Instalar dependências
-pip install -r requirements.txt
+# 1. Instalar dependências
+pip install streamlit pandas google-generativeai
 
-# Rodar a aplicação
-streamlit run app.py
+# 2. Rodar o app
+streamlit run ./src/app.py
 ```
